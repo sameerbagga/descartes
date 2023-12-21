@@ -1,24 +1,13 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from .models import Author, Post
 from .serializers import AuthorSerializer, PostSerializer
 
 
-# Create your views here.
-class AuthorListCreateView(generics.ListCreateAPIView):
+class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
 
-class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
-
-
-class PostListCreateView(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
-
-class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer

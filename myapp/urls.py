@@ -1,14 +1,11 @@
-from django.urls import path
-from .views import (
-    AuthorListCreateView,
-    AuthorDetailView,
-    PostListCreateView,
-    PostDetailView,
-)
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import AuthorViewSet, PostViewSet
+
+router = DefaultRouter()
+router.register(r"authors", AuthorViewSet)
+router.register(r"posts", PostViewSet)
 
 urlpatterns = [
-    path("authors/", AuthorListCreateView.as_view(), name="author-list-create"),
-    path("authors/<int:pk>/", AuthorDetailView.as_view(), name="author-detail"),
-    path("posts/", PostListCreateView.as_view(), name="post-list-create"),
-    path("posts/<int:pk>/", PostDetailView.as_view(), name="post-detail"),
+    path("", include(router.urls)),
 ]
